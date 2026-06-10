@@ -4,6 +4,9 @@
  */
 package vista;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+
 /**
  *
  * @author arsel
@@ -32,10 +35,15 @@ public class AdministrarCuentas extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         content = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
+        sctnCatalogo = new javax.swing.JPanel();
+        lblSubtitulo = new javax.swing.JLabel();
+        btnNuevaCuenta = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaCatalogo = new javax.swing.JTree();
         header = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        lblTitulo = new javax.swing.JLabel();
+        cmbxTipoCuenta = new javax.swing.JComboBox<>();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(241, 242, 238));
@@ -80,37 +88,117 @@ public class AdministrarCuentas extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReportes)
-                .addContainerGap(1019, Short.MAX_VALUE))
+                .addContainerGap(642, Short.MAX_VALUE))
         );
 
-        getContentPane().add(sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, -1));
+        getContentPane().add(sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 850));
 
         content.setBackground(new java.awt.Color(241, 242, 238));
+
+        sctnCatalogo.setBackground(new java.awt.Color(255, 255, 255));
+        sctnCatalogo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(191, 183, 182), 1, true));
+
+        lblSubtitulo.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        lblSubtitulo.setForeground(new java.awt.Color(0, 0, 0));
+        lblSubtitulo.setText("Todas las cuentas");
+
+        btnNuevaCuenta.setBackground(new java.awt.Color(228, 130, 0));
+        btnNuevaCuenta.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        btnNuevaCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevaCuenta.setText("+");
+        btnNuevaCuenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevaCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaCuentaActionPerformed(evt);
+            }
+        });
+
+        listaCatalogo.setBackground(new java.awt.Color(255, 255, 255));
+        listaCatalogo.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        listaCatalogo.setForeground(new java.awt.Color(0, 0, 0));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("1101 Efectivo y quivalentes");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("110101 Efectivo en Caja General");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("110102 Efectivo en Bancos");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("1102 Deudores Comerciales");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("110201 Clientes locales");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        listaCatalogo.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        listaCatalogo.setToolTipText("");
+        listaCatalogo.setLargeModel(true);
+        listaCatalogo.setRootVisible(false);
+        listaCatalogo.setShowsRootHandles(true);
+        jScrollPane1.setViewportView(listaCatalogo);
+
+        javax.swing.GroupLayout sctnCatalogoLayout = new javax.swing.GroupLayout(sctnCatalogo);
+        sctnCatalogo.setLayout(sctnCatalogoLayout);
+        sctnCatalogoLayout.setHorizontalGroup(
+            sctnCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sctnCatalogoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblSubtitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addComponent(btnNuevaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addComponent(jScrollPane1)
+        );
+        sctnCatalogoLayout.setVerticalGroup(
+            sctnCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sctnCatalogoLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(sctnCatalogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblSubtitulo)
+                    .addComponent(btnNuevaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1380, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentLayout.createSequentialGroup()
+                .addGap(16, 969, Short.MAX_VALUE)
+                .addComponent(sctnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentLayout.createSequentialGroup()
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1000, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sctnCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 1380, 1010));
+        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 1380, 780));
 
         header.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Corbel", 1, 26)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Administrar Cuentas");
+        lblTitulo.setFont(new java.awt.Font("Corbel", 1, 26)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        lblTitulo.setText("Administrar Cuentas");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de cuenta" }));
+        cmbxTipoCuenta.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        cmbxTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo de cuenta" }));
+        cmbxTipoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbxTipoCuentaActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("Buscar cuenta");
+        txtBuscar.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        txtBuscar.setText("Buscar cuenta");
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
         header.setLayout(headerLayout);
@@ -118,11 +206,11 @@ public class AdministrarCuentas extends javax.swing.JFrame {
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 757, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         headerLayout.setVerticalGroup(
@@ -130,9 +218,9 @@ public class AdministrarCuentas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTitulo)
+                    .addComponent(cmbxTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -150,51 +238,48 @@ public class AdministrarCuentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnReportesActionPerformed
 
+    private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaCuentaActionPerformed
+
+    private void cmbxTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxTipoCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbxTipoCuentaActionPerformed
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministrarCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministrarCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministrarCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministrarCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+       try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception e) {
+            System.out.println("Error al inicializar FlatLaf" + e.getMessage());
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdministrarCuentas().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AdministrarCuentas().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCatalogo;
+    private javax.swing.JButton btnNuevaCuenta;
     private javax.swing.JButton btnReportes;
+    private javax.swing.JComboBox<String> cmbxTipoCuenta;
     private javax.swing.JPanel content;
     private javax.swing.JPanel header;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblSubtitulo;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTree listaCatalogo;
+    private javax.swing.JPanel sctnCatalogo;
     private javax.swing.JPanel sideBar;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

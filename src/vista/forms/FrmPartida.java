@@ -15,7 +15,81 @@ public class FrmPartida extends javax.swing.JFrame {
      */
     public FrmPartida() {
         initComponents();
+        tblCuentas.setDefaultEditor(Object.class, null);
+       // txtDia
+txtDia.addFocusListener(new java.awt.event.FocusAdapter() {
+    public void focusGained(java.awt.event.FocusEvent e) {
+        if (txtDia.getForeground().equals(java.awt.Color.GRAY)) {
+            txtDia.setText("");
+            txtDia.setForeground(java.awt.Color.BLACK);
+        }
     }
+    public void focusLost(java.awt.event.FocusEvent e) {
+        if (txtDia.getText().isEmpty()) {
+            txtDia.setText("20");
+            txtDia.setForeground(java.awt.Color.GRAY);
+        }
+    }
+});
+
+// txtMes
+txtMes.addFocusListener(new java.awt.event.FocusAdapter() {
+    public void focusGained(java.awt.event.FocusEvent e) {
+        if (txtMes.getForeground().equals(java.awt.Color.GRAY)) {
+            txtMes.setText("");
+            txtMes.setForeground(java.awt.Color.BLACK);
+        }
+    }
+    public void focusLost(java.awt.event.FocusEvent e) {
+        if (txtMes.getText().isEmpty()) {
+            txtMes.setText("05");
+            txtMes.setForeground(java.awt.Color.GRAY);
+        }
+    }
+});
+txtNota.addFocusListener(new java.awt.event.FocusAdapter() {
+    public void focusGained(java.awt.event.FocusEvent e) {
+        if (txtNota.getForeground().equals(java.awt.Color.GRAY)) {
+            txtNota.setText("");
+            txtNota.setForeground(java.awt.Color.BLACK);
+        }
+    }
+    public void focusLost(java.awt.event.FocusEvent e) {
+        if (txtNota.getText().isEmpty()) {
+            txtNota.setText("Describe el movimiento");
+            txtNota.setForeground(java.awt.Color.GRAY);
+        }
+    }
+});
+// txtAnio
+txtAnio.addFocusListener(new java.awt.event.FocusAdapter() {
+    public void focusGained(java.awt.event.FocusEvent e) {
+        if (txtAnio.getForeground().equals(java.awt.Color.GRAY)) {
+            txtAnio.setText("");
+            txtAnio.setForeground(java.awt.Color.BLACK);
+        }
+    }
+    public void focusLost(java.awt.event.FocusEvent e) {
+        if (txtAnio.getText().isEmpty()) {
+            txtAnio.setText("2025");
+            txtAnio.setForeground(java.awt.Color.GRAY);
+        }
+    }
+});
+        // Esquinas más redondeadas
+        txtDia.putClientProperty("JTextField.arc", 10);
+        txtMes.putClientProperty("JTextField.arc", 10);
+        txtAnio.putClientProperty("JTextField.arc", 10);
+        // Guardar — estilo deshabilitado como en el mockup
+btnGuardar.putClientProperty("JButton.buttonType", "roundRect");
+//btnGuardar.setEnabled(false);
+
+// Cancelar — fondo oscuro
+btnCancelar.putClientProperty("JButton.buttonType", "roundRect");
+btnCancelar.setBackground(new java.awt.Color(40, 40, 40));
+btnCancelar.setForeground(java.awt.Color.WHITE);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,26 +100,169 @@ public class FrmPartida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngEnviarTotal = new javax.swing.ButtonGroup();
+        pnlbackground = new javax.swing.JPanel();
+        lblPartida = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        txtDia = new javax.swing.JTextField();
+        txtMes = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
+        chkFechaActual = new javax.swing.JCheckBox();
+        lblNota = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtNota = new javax.swing.JTextArea();
+        lblEnviarTotal = new javax.swing.JLabel();
+        rbtDebe = new javax.swing.JRadioButton();
+        rbtHaber = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblCuentas = new javax.swing.JTable();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(905, 507));
+
+        pnlbackground.setBackground(new java.awt.Color(241, 242, 238));
+        pnlbackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPartida.setFont(new java.awt.Font("Corbel", 1, 26)); // NOI18N
+        lblPartida.setText("Partida 1");
+        lblPartida.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(132, 140, 142)));
+        pnlbackground.add(lblPartida, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 860, 40));
+
+        lblFecha.setFont(new java.awt.Font("Corbel", 1, 13)); // NOI18N
+        lblFecha.setText("Fecha");
+        pnlbackground.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 50, -1));
+
+        txtDia.setColumns(4);
+        txtDia.setForeground(new java.awt.Color(204, 204, 204));
+        txtDia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDia.setText("20");
+        txtDia.setCaretColor(new java.awt.Color(153, 153, 153));
+        pnlbackground.add(txtDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 30));
+
+        txtMes.setColumns(4);
+        txtMes.setForeground(new java.awt.Color(204, 204, 204));
+        txtMes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMes.setText("05");
+        pnlbackground.add(txtMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 30));
+
+        txtAnio.setColumns(6);
+        txtAnio.setForeground(new java.awt.Color(204, 204, 204));
+        txtAnio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAnio.setText("2025");
+        pnlbackground.add(txtAnio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, 30));
+
+        chkFechaActual.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        chkFechaActual.setText("Fecha Actual");
+        chkFechaActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkFechaActualActionPerformed(evt);
+            }
+        });
+        pnlbackground.add(chkFechaActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
+
+        lblNota.setFont(new java.awt.Font("Corbel", 1, 13)); // NOI18N
+        lblNota.setText("Nota");
+        pnlbackground.add(lblNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 40, -1));
+
+        txtNota.setColumns(20);
+        txtNota.setForeground(new java.awt.Color(204, 204, 204));
+        txtNota.setLineWrap(true);
+        txtNota.setRows(5);
+        txtNota.setText("Describe el movimiento");
+        txtNota.setWrapStyleWord(true);
+        txtNota.setMinimumSize(new java.awt.Dimension(240, 20));
+        jScrollPane1.setViewportView(txtNota);
+
+        pnlbackground.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 210, 110));
+
+        lblEnviarTotal.setFont(new java.awt.Font("Corbel", 1, 13)); // NOI18N
+        lblEnviarTotal.setText("Enviar Total");
+        pnlbackground.add(lblEnviarTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+
+        btngEnviarTotal.add(rbtDebe);
+        rbtDebe.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        rbtDebe.setText("Debe");
+        pnlbackground.add(rbtDebe, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+
+        btngEnviarTotal.add(rbtHaber);
+        rbtHaber.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        rbtHaber.setText("Haber");
+        pnlbackground.add(rbtHaber, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
+
+        tblCuentas.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
+        tblCuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cuenta", "Detalle", "Debe", "Haber"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblCuentas.setGridColor(new java.awt.Color(204, 204, 204));
+        tblCuentas.setRowHeight(30);
+        jScrollPane2.setViewportView(tblCuentas);
+
+        pnlbackground.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 570, 330));
+
+        btnGuardar.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        btnGuardar.setText(" Guardar");
+        pnlbackground.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 430, -1, -1));
+
+        btnCancelar.setFont(new java.awt.Font("Corbel", 0, 13)); // NOI18N
+        btnCancelar.setText(" Cancelar");
+        pnlbackground.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 430, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(pnlbackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(pnlbackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void chkFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFechaActualActionPerformed
+        boolean usar = chkFechaActual.isSelected();
+        txtDia.setEnabled(!usar);
+        txtMes.setEnabled(!usar);
+        txtAnio.setEnabled(!usar);
+
+        if (usar) {
+            java.time.LocalDate hoy = java.time.LocalDate.now();
+            txtDia.setText(String.valueOf(hoy.getDayOfMonth()));
+            txtMes.setText(String.valueOf(hoy.getMonthValue()));
+            txtAnio.setText(String.valueOf(hoy.getYear()));
+        }
+    }//GEN-LAST:event_chkFechaActualActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        try {
+            com.formdev.flatlaf.FlatLightLaf.setup();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -78,5 +295,23 @@ public class FrmPartida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.ButtonGroup btngEnviarTotal;
+    private javax.swing.JCheckBox chkFechaActual;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblEnviarTotal;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblNota;
+    private javax.swing.JLabel lblPartida;
+    private javax.swing.JPanel pnlbackground;
+    private javax.swing.JRadioButton rbtDebe;
+    private javax.swing.JRadioButton rbtHaber;
+    private javax.swing.JTable tblCuentas;
+    private javax.swing.JTextField txtAnio;
+    private javax.swing.JTextField txtDia;
+    private javax.swing.JTextField txtMes;
+    private javax.swing.JTextArea txtNota;
     // End of variables declaration//GEN-END:variables
 }

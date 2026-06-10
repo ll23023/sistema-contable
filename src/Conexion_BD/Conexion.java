@@ -1,73 +1,65 @@
 package Conexion_BD;
 
-//Recuerde importar la biblioteca de conexión
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Conexion {
-     private final String url = "";
-    private final String login = "root"; //Administrador de MySQL
-    private final String password = "";
+    private final String url = "jdbc:mariadb://localhost:3306/sistema_contable";
+    private final String login = "root"; 
+    private final String password = "";  
     private Connection cnx = null;
     private Statement sttm = null;
     private ResultSet rst = null;
 
-    
+    private final String DRIVER = "org.mariadb.jdbc.Driver";
+
     public Conexion(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url,login,password);
+            Class.forName(DRIVER);
+            cnx = DriverManager.getConnection(url, login, password);
+            System.out.println("¡Conexión exitosa a sistema_contable usando MariaDB Driver!");
         } catch (ClassNotFoundException | SQLException c) {
-            JOptionPane.showMessageDialog(null,  
-                    "ERROR: " + c.getMessage());
-            System.exit(1); //salir de aplicación
+            JOptionPane.showMessageDialog(null, "ERROR DE CONEXIÓN: " + c.getMessage());
+            System.exit(1); 
         }
     }
 
-    //método para Agregar, Modificar y Borrar datos
     public void UID(String sql) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, login, password);
+            if (cnx == null || cnx.isClosed()) {
+                cnx = DriverManager.getConnection(url, login, password);
+            }
             sttm = cnx.createStatement();
-            sttm.executeUpdate(sql); //statement
-        } catch (ClassNotFoundException | SQLException c) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + c.getMessage());
-            System.exit(1); //salir de aplicación
+            sttm.executeUpdate(sql); 
+        } catch (SQLException c) {
+            JOptionPane.showMessageDialog(null, "ERROR EN ESCRITURA: " + c.getMessage());
         }
     }
 
-    //Método para Consultar datos
     public ResultSet getValores(String sql) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            cnx = DriverManager.getConnection(url, login, password);
+            if (cnx == null || cnx.isClosed()) {
+                cnx = DriverManager.getConnection(url, login, password);
+            }
             sttm = cnx.createStatement();
-            rst = sttm.executeQuery(sql);  //resultset
-        } catch (ClassNotFoundException | SQLException c) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + c.getMessage());
-            System.exit(1);
+            rst = sttm.executeQuery(sql);  
+        } catch (SQLException c) {
+            JOptionPane.showMessageDialog(null, "ERROR EN CONSULTA: " + c.getMessage());
         }
         return rst;
-
     }
 
     public void cerrar() {
         try {
-            this.cnx.close();
+            if (cnx != null && !cnx.isClosed()) { cnx.close(); }
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
-    
-    public Connection getConexion() {
-        return this.cnx;
-    }
+    public Connection getConexion() { return this.cnx; }
 }

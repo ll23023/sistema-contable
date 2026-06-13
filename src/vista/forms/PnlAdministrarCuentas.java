@@ -1,9 +1,20 @@
 package vista.forms;
 
+import consultas_sql.cuenta;
+import consultas_sql.cuenta.CuentaData;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+
 public class PnlAdministrarCuentas extends javax.swing.JPanel {
 
     public PnlAdministrarCuentas() {
         initComponents();
+        cargarCuentasEnArbol();
+        //faltaria refrescar
     }
 
     @SuppressWarnings("unchecked")
@@ -344,9 +355,80 @@ public class PnlAdministrarCuentas extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+//TODO: creo una clase para heredar estos metodos y asi no sobrecargar aqui?
+//TODO: no supe como quitarle las cuentas ejemplo del jtree
+    
+    private void cargarCuentasEnArbol() {
+        cuenta cuentaDAO = new cuenta();
+        List<CuentaData> cuentas = cuentaDAO.obtenerTodas();
 
+        // Crear el nodo raíz (invisible)
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Cuentas");
+
+        // Agrupar cuentas por los primeros dígitos (jerarquía)
+        Map<String, DefaultMutableTreeNode> grupos = new TreeMap<>();
+
+        for (CuentaData c : cuentas) {
+            String codigoStr = String.valueOf(c.getCodigoCuenta());
+            String grupoKey;
+            DefaultMutableTreeNode nodoGrupo;
+
+            // Determinar nivel jerárquico según la longitud del código
+            if (codigoStr.length() >= 4) {
+                // Grupo principal (osea la cuenta mayor la de 4 dígitos)
+                grupoKey = codigoStr.substring(0, 4);
+                nodoGrupo = grupos.get(grupoKey);
+
+                if (nodoGrupo == null) {
+                    // Buscar el nombre del grupo de la primera cuenta que coincida
+                    String nombreGrupo = grupoKey + " " + obtenerNombreGrupo(grupoKey, cuentas);
+                    nodoGrupo = new DefaultMutableTreeNode(nombreGrupo);
+                    grupos.put(grupoKey, nodoGrupo);
+                    root.add(nodoGrupo);
+                }
+
+                // Crear nodo hijo (cuenta específica)
+                DefaultMutableTreeNode nodoCuenta = new DefaultMutableTreeNode(
+                        c.getCodigoCuenta() + " " + c.getNombre()
+                );
+                nodoGrupo.add(nodoCuenta);
+            }
+        }
+
+        // Aplicar el modelo al JTree
+        listaCatalogo.setModel(new DefaultTreeModel(root));
+        listaCatalogo.setRootVisible(false); // Ocultar nodo raíz
+        listaCatalogo.setShowsRootHandles(true); // Mostrar manijas para expandir/colapsar
+
+        // Expandir todos los nodos
+        expandirTodosNodos(listaCatalogo, 0, listaCatalogo.getRowCount());
+    }
+
+    private String obtenerNombreGrupo(String codigoGrupo, List<CuentaData> cuentas) {
+        // Busca un nombre de ejemplo para el grupo
+        for (CuentaData c : cuentas) {
+            if (String.valueOf(c.getCodigoCuenta()).startsWith(codigoGrupo)) {
+                String nombreCompleto = c.getNombre();
+                // Extrae solo la parte principal del nombre
+                if (nombreCompleto.length() > 20) {
+                    return nombreCompleto.substring(0, 20) + "...";
+                }
+                return nombreCompleto;
+            }
+        }
+        return "Grupo " + codigoGrupo;
+    }
+
+    private void expandirTodosNodos(javax.swing.JTree tree, int startingIndex, int rowCount) {
+        for (int i = startingIndex; i < rowCount; ++i) {
+            tree.expandRow(i);
+        }
+        if (tree.getRowCount() != rowCount) {
+            expandirTodosNodos(tree, rowCount, tree.getRowCount());
+        }
+    }
     private void btnNuevaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaCuentaActionPerformed
-        
+
     }//GEN-LAST:event_btnNuevaCuentaActionPerformed
 
     private void chkFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFechaActualActionPerformed

@@ -6,6 +6,9 @@ package consultas_sql;
 
 import Conexion_BD.Conexion;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class cuenta {
     
@@ -27,11 +30,58 @@ public class cuenta {
         return cn.getValores(sql);
     }
     
+     // Clase interna para representar una cuenta
+    public static class CuentaData {
+        private int codigoCuenta;
+        private String nombre;
+        private double monto;
+        private int tipoCuenta;
+        private int claseCuenta;
+        
+        public CuentaData(int codigoCuenta, String nombre, double monto, int tipoCuenta, int claseCuenta) {
+            this.codigoCuenta = codigoCuenta;
+            this.nombre = nombre;
+            this.monto = monto;
+            this.tipoCuenta = tipoCuenta;
+            this.claseCuenta = claseCuenta;
+        }
+        
+        // Getters
+        public int getCodigoCuenta() { return codigoCuenta; }
+        public String getNombre() { return nombre; }
+        public double getMonto() { return monto; }
+        public int getTipoCuenta() { return tipoCuenta; }
+        public int getClaseCuenta() { return claseCuenta; }
+        
+        @Override
+        public String toString() {
+            return codigoCuenta + " " + nombre;
+        }
+    }
+    
     /**
-     * Trae todas las cuentas registradas 
+     * Trae todas las cuentas registradas como lista de objetos
      */
-    public ResultSet obtenerTodas() {
+    public List<CuentaData> obtenerTodas() {
+        List<CuentaData> cuentas = new ArrayList<>();
         String sql = "SELECT * FROM cuenta ORDER BY codigo_cuenta ASC";
-        return cn.getValores(sql);
+        ResultSet rs = cn.getValores(sql);
+        
+        try {
+            while (rs.next()) {
+                cuentas.add(new CuentaData(
+                    rs.getInt("codigo_cuenta"),
+                    rs.getString("nombre"),
+                    rs.getDouble("monto"),
+                    rs.getInt("tipo_cuenta"),
+                    rs.getInt("clase_cuenta")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException e) {}
+        }
+        return cuentas;
     }
 }

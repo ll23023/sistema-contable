@@ -7,7 +7,7 @@ import vista.forms.PnlAdministrarCuentas;
 
 
 public class Home extends javax.swing.JFrame {
-    
+
     public Home() {
         initComponents();
         PnlAdministrarCuentas panel = new PnlAdministrarCuentas();
